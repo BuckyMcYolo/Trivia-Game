@@ -1,17 +1,72 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  font-family: Inter, "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-size: 100% 100%;
+  background-image: linear-gradient(
+    200deg,
+    rgb(201, 111, 111),
+    rgb(248, 74, 236)
+  );
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+.title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 25rem;
+  padding-bottom: 30rem;
+  font-size: 2.5rem;
+  height: 100%;
+}
+.playBtn {
+  height: 6vh;
+  width: 12vw;
+  background-color: mediumorchid;
+  border-radius: 15px;
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+
+.playBtn:hover {
+  opacity: 0.9;
+}
 
 .answers {
   list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  width: 120px;
+  height: 50px;
+  border-radius: 15px;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
+  cursor: pointer;
+}
+.answers:hover {
+  opacity: 0.9;
+}
+
+.question {
+  padding-left: 10px;
+}
+
+.answers {
+  background-color: darkgray;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.btnHolder {
+  align-items: flex-start;
 }

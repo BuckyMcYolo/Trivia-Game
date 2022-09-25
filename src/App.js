@@ -6,17 +6,26 @@ function App() {
   // The questions displayed on the page
   const [display, setDisplay] = useState(false);
 
-  const [triviaQuestions, setTriviaQuestions] = useState();
+  const [selected, setSelected] = useState(false);
+
+  const [triviaQuestions, setTriviaQuestions] = useState([]);
   //getting the questions from API and logging them in state
 
   useEffect(() => {
-    fetch("https://opentdb.com/api.php?amount=5&category=11&difficulty=easy")
+    fetch(
+      "https://opentdb.com/api.php?amount=5&category=11&difficulty=easy&type=multiple"
+    )
       .then((response) => response.json())
       .then((data) => {
         const responseQuestions = data.results;
         setTriviaQuestions(responseQuestions);
+        console.log(responseQuestions);
       });
   }, []);
+
+  function handleClick() {
+    setSelected(!selected);
+  }
 
   //display current questions on page
 
@@ -26,27 +35,17 @@ function App() {
   return (
     <div className="App">
       {!display && (
-        <h1>
+        <h1 className="title">
           Click here to play!
-          <button onClick={displayQuestionPage}>whoop</button>
+          <button onClick={displayQuestionPage} className="playBtn">
+            Play Now!
+          </button>
         </h1>
       )}
       {display && (
         <div>
           <h1>Movie Trivia</h1>
-          <ol>
-            {triviaQuestions &&
-              triviaQuestions.map((item) => {
-                console.log(item);
-                return (
-                  <div>
-                    <h3>{item.question}</h3>
-                    <p className="answers">{item.correct_answer}</p>
-                    <p className="answers">{item.incorrect_answers}</p>
-                  </div>
-                );
-              })}
-          </ol>
+          <Questions trivia={triviaQuestions} click={handleClick} />
         </div>
       )}
     </div>
