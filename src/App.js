@@ -1,14 +1,13 @@
 import "./App.css";
 import Questions from "./Questions";
 import { useEffect, useState } from "react";
+// import { nanoid } from "https://cdn.jsdelivr.net/npm/nanoid/nanoid.js";
 
 function App() {
   // The questions displayed on the page
   const [display, setDisplay] = useState(false);
 
-  const [selected, setSelected] = useState(false);
-
-  const [triviaQuestions, setTriviaQuestions] = useState([]);
+  const [triviaQuestions, setTriviaQuestions] = useState();
   //getting the questions from API and logging them in state
 
   useEffect(() => {
@@ -17,21 +16,25 @@ function App() {
     )
       .then((response) => response.json())
       .then((data) => {
-        const responseQuestions = data.results;
+        const responseQuestions = data.results.map((question) => ({
+          ...question,
+          answers: [
+            question.correct_answer,
+            ...question.incorrect_answers,
+          ].sort(() => Math.random() - 0.5),
+        }));
         setTriviaQuestions(responseQuestions);
-        console.log(responseQuestions);
       });
   }, []);
-
-  function handleClick() {
-    setSelected(!selected);
-  }
 
   //display current questions on page
 
   function displayQuestionPage() {
     setDisplay(!display);
   }
+
+  //set answer to selected
+
   return (
     <div className="App">
       {!display && (
@@ -45,7 +48,7 @@ function App() {
       {display && (
         <div>
           <h1>Movie Trivia</h1>
-          <Questions trivia={triviaQuestions} click={handleClick} />
+          <Questions trivia={triviaQuestions} />
         </div>
       )}
     </div>

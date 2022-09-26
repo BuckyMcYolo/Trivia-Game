@@ -49,18 +49,28 @@ code {
   justify-content: center;
   margin: 10px;
   cursor: pointer;
+  background-color: darkgray;
 }
 .answers:hover {
   opacity: 0.9;
 }
-
+.selected {
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  width: 120px;
+  height: 50px;
+  border-radius: 15px;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
+  cursor: pointer;
+  background-color: darkslateblue;
+}
 .question {
   padding-left: 10px;
 }
 
-.answers {
-  background-color: darkgray;
-}
 .container {
   display: flex;
   flex-direction: column;
