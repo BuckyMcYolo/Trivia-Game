@@ -2,9 +2,9 @@ import React, { useState } from "react";
 
 const Questions = (props) => {
   const [picked, setPicked] = useState();
-  const styles = {
-    backgroundColor: picked ? "black" : "darkgray",
-  };
+  // const styles = {
+  //   backgroundColor: picked ? "black" : "darkgray",
+  // };
 
   const selected = () => {
     setPicked(!picked);
@@ -20,20 +20,22 @@ const Questions = (props) => {
         />
         <span className="btnHolder">
           <button
-            onClick={selected}
-            style={styles}
+            onClick={() => props.handleClick(item.id, item.answers[0])}
             className="answers"
             dangerouslySetInnerHTML={{ __html: item.answers[0] }}
           ></button>
           <button
+            onClick={() => props.handleClick(item.id, item.answers[1])}
             className="answers"
             dangerouslySetInnerHTML={{ __html: item.answers[1] }}
           ></button>{" "}
           <button
+            onClick={() => props.handleClick(item.id, item.answers[2])}
             className="answers"
             dangerouslySetInnerHTML={{ __html: item.answers[2] }}
           ></button>{" "}
           <button
+            onClick={() => props.handleClick(item.id, item.answers[3])}
             className="answers"
             dangerouslySetInnerHTML={{ __html: item.answers[3] }}
           ></button>
