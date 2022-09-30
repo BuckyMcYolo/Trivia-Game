@@ -27,7 +27,6 @@ function App() {
         setTriviaQuestions(responseQuestions);
       });
   }, []);
-
   //display current questions on page
 
   function displayQuestionPage() {
@@ -43,7 +42,7 @@ function App() {
       return foundUserAnswer
         ? prevAnswerState.map((item) => {
             return item.questionId === questionId
-              ? { ...item, chooseAnswer: value }
+              ? { ...item, chosenAnswer: value }
               : item;
           })
         : [
@@ -54,7 +53,6 @@ function App() {
             },
           ];
     });
-    console.log(questionId, value);
   }
 
   let questionHTML;
@@ -76,7 +74,7 @@ function App() {
             (questionHTML = triviaQuestions.map((question) => {
               return (
                 <Questions
-                  trivia={triviaQuestions}
+                  trivia={question}
                   handleClick={chooseAnswer}
                   key={question.id}
                 />

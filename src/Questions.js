@@ -1,57 +1,60 @@
 import React, { useState } from "react";
 
 const Questions = (props) => {
-  const [picked, setPicked] = useState();
-  // const styles = {
-  //   backgroundColor: picked ? "black" : "darkgray",
-  // };
+  const [selected, setSelected] = useState(false);
 
-  const selected = () => {
-    setPicked(!picked);
-  };
+  const classStyle = {};
 
-  const pageData = props.trivia.map((item) => {
-    // console.log(item.id)
-    return (
+  return (
+    <div>
       <div className="container">
         <h2
           className="question"
-          dangerouslySetInnerHTML={{ __html: item.question }}
+          dangerouslySetInnerHTML={{ __html: props.trivia.question }}
         />
         <span className="btnHolder">
           <button
-            onClick={() => props.handleClick(item.id, item.answers[0])}
+            onClick={() =>
+              props.handleClick(
+                props.trivia.id,
+                props.trivia.answers[0],
+                props.trivia.answers[0]
+              )
+            }
             className="answers"
-            dangerouslySetInnerHTML={{ __html: item.answers[0] }}
-          ></button>
+            dangerouslySetInnerHTML={{
+              __html: props.trivia.answers[0],
+            }}
+          />
           <button
-            onClick={() => props.handleClick(item.id, item.answers[1])}
+            onClick={() =>
+              props.handleClick(props.trivia.id, props.trivia.answers[1])
+            }
             className="answers"
-            dangerouslySetInnerHTML={{ __html: item.answers[1] }}
-          ></button>{" "}
+            dangerouslySetInnerHTML={{
+              __html: props.trivia.answers[1],
+            }}
+          />
           <button
-            onClick={() => props.handleClick(item.id, item.answers[2])}
+            onClick={() =>
+              props.handleClick(props.trivia.id, props.trivia.answers[2])
+            }
             className="answers"
-            dangerouslySetInnerHTML={{ __html: item.answers[2] }}
-          ></button>{" "}
+            dangerouslySetInnerHTML={{
+              __html: props.trivia.answers[2],
+            }}
+          />
           <button
-            onClick={() => props.handleClick(item.id, item.answers[3])}
+            onClick={() =>
+              props.handleClick(props.trivia.id, props.trivia.answers[3])
+            }
             className="answers"
-            dangerouslySetInnerHTML={{ __html: item.answers[3] }}
-          ></button>
-          {/* {item.answers.map((elem) => {
-            return (
-              <button
-                className="answers"
-                dangerouslySetInnerHTML={{ __html: elem }}
-              ></button>
-            );
-          })} */}
+            dangerouslySetInnerHTML={{ __html: props.trivia.answers[3] }}
+          />
         </span>
       </div>
-    );
-  });
-  return <div>{pageData}</div>;
+    </div>
+  );
 };
 
 export default Questions;
