@@ -8,6 +8,8 @@ function App() {
   const [display, setDisplay] = useState(false);
   const [userAnswers, setUserAnswers] = useState([]);
   const [triviaQuestions, setTriviaQuestions] = useState();
+  const [showAnswers, setShowAnswers] = useState(false);
+  const [count, setCount] = useState(0);
   //getting the questions from API and logging them in state
 
   useEffect(() => {
@@ -72,15 +74,24 @@ function App() {
           <h1>Movie Trivia</h1>
           {
             (questionHTML = triviaQuestions.map((question) => {
+              const chosen = userAnswers.find(
+                (item) => item.questionId === question.id
+              );
               return (
                 <Questions
+                  isChosen={userAnswers.chosenAnswer}
+                  userChoice={chosen && chosen.chosenAnswer}
                   trivia={question}
                   handleClick={chooseAnswer}
                   key={question.id}
+                  showAnswers={showAnswers}
+                  correct={() => setCount(count + 1)}
                 />
               );
             }))
           }
+          <button onClick={() => setShowAnswers(true)}>Submit Answers</button>
+          {showAnswers && <h2>You got {count}/5 correct!</h2>}
         </div>
       )}
     </div>

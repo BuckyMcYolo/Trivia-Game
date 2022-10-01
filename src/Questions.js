@@ -1,9 +1,29 @@
-import React, { useState } from "react";
+import React from "react";
 
 const Questions = (props) => {
-  const [selected, setSelected] = useState(false);
+  function setAnswer(choice) {
+    if (choice === props.userChoice) {
+      return "selected";
+    } else if (choice !== props.userChoice) {
+      return "answers";
+    }
+  }
 
-  const classStyle = {};
+  function finalAnswers(choice) {
+    if (
+      choice === props.userChoice &&
+      props.userChoice === props.trivia.correct_answer
+    ) {
+      return "correct_answer";
+    } else if (
+      choice === props.userChoice &&
+      props.userChoice !== props.trivia.correct_answer
+    ) {
+      return "incorrect_answer";
+    } else {
+      return "answers_after_click";
+    }
+  }
 
   return (
     <div>
@@ -14,41 +34,57 @@ const Questions = (props) => {
         />
         <span className="btnHolder">
           <button
+            disabled={props.showAnswers}
             onClick={() =>
-              props.handleClick(
-                props.trivia.id,
-                props.trivia.answers[0],
-                props.trivia.answers[0]
-              )
+              props.handleClick(props.trivia.id, props.trivia.answers[0])
             }
-            className="answers"
+            className={
+              props.showAnswers
+                ? finalAnswers(props.trivia.answers[0])
+                : setAnswer(props.trivia.answers[0])
+            }
             dangerouslySetInnerHTML={{
               __html: props.trivia.answers[0],
             }}
-          />
+          ></button>
           <button
+            disabled={props.showAnswers}
             onClick={() =>
               props.handleClick(props.trivia.id, props.trivia.answers[1])
             }
-            className="answers"
+            className={
+              props.showAnswers
+                ? finalAnswers(props.trivia.answers[1])
+                : setAnswer(props.trivia.answers[1])
+            }
             dangerouslySetInnerHTML={{
               __html: props.trivia.answers[1],
             }}
           />
           <button
+            disabled={props.showAnswers}
             onClick={() =>
               props.handleClick(props.trivia.id, props.trivia.answers[2])
             }
-            className="answers"
+            className={
+              props.showAnswers
+                ? finalAnswers(props.trivia.answers[2])
+                : setAnswer(props.trivia.answers[2])
+            }
             dangerouslySetInnerHTML={{
               __html: props.trivia.answers[2],
             }}
           />
           <button
+            disabled={props.showAnswers}
             onClick={() =>
               props.handleClick(props.trivia.id, props.trivia.answers[3])
             }
-            className="answers"
+            className={
+              props.showAnswers
+                ? finalAnswers(props.trivia.answers[3])
+                : setAnswer(props.trivia.answers[3])
+            }
             dangerouslySetInnerHTML={{ __html: props.trivia.answers[3] }}
           />
         </span>
