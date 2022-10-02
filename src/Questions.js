@@ -1,8 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 
 const Questions = (props) => {
-  const [count, setCount] = useState(0);
-
   function setAnswer(choice) {
     if (choice === props.userChoice) {
       return "selected";
