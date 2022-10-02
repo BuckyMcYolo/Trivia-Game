@@ -25,24 +25,41 @@ code {
   font-size: 2.5rem;
   height: 100%;
 }
+.Main_title {
+  text-align: center;
+  font-size: 3rem;
+  padding: 25px;
+  text-decoration: underline;
+}
 .playBtn {
   height: 6vh;
   width: 12vw;
+  margin: 2rem;
   background-color: mediumorchid;
   border-radius: 15px;
   font-size: 1.4rem;
   cursor: pointer;
+  transition: 0.25s;
 }
 
 .playBtn:hover {
-  opacity: 0.9;
+  scale: 1.033;
 }
-
+.playBtn:active {
+  background-color: rgb(96, 25, 114);
+}
+.scoreP {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 5rem;
+}
 .answers {
   list-style-type: none;
   display: flex;
   flex-direction: column;
-  width: 120px;
+  width: 130px;
   height: 50px;
   border-radius: 15px;
   align-items: center;
@@ -58,7 +75,7 @@ code {
   list-style-type: none;
   display: flex;
   flex-direction: column;
-  width: 120px;
+  width: 130px;
   height: 50px;
   border-radius: 15px;
   align-items: center;
@@ -69,7 +86,8 @@ code {
   font-weight: bold;
 }
 .question {
-  padding-left: 10px;
+  padding: 10px;
+  text-align: center;
 }
 
 .container {
@@ -77,6 +95,7 @@ code {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin: 0px 6rem;
 }
 .btnHolder {
   align-items: flex-start;
@@ -124,4 +143,42 @@ code {
 }
 button[disabled] {
   color: black;
+}
+.after_trivia {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 25px;
+  margin: 25px;
+}
+.submit {
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid black;
+  background-color: rgb(0, 0, 0);
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+}
+.submit:hover {
+  opacity: 0.9;
+}
+.submit:active {
+  opacity: 0.8;
+  scale: 1.025;
+}
+.play_again {
+  padding: 12px;
+  margin-top: 0.6rem;
+  border-radius: 10px;
+  border: none;
+  background-color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.play_again:active {
+  background-color: rgb(0, 0, 0);
 }

@@ -9,7 +9,11 @@ function App() {
   const [userAnswers, setUserAnswers] = useState([]);
   const [triviaQuestions, setTriviaQuestions] = useState();
   const [showAnswers, setShowAnswers] = useState(false);
-  const [count, setCount] = useState(0);
+  const [restart, setRestart] = useState(false);
+  const [score, setScore] = useState(
+    JSON.parse(localStorage.getItem("score")) || 0
+  );
+
   //getting the questions from API and logging them in state
 
   useEffect(() => {
@@ -28,15 +32,20 @@ function App() {
         }));
         setTriviaQuestions(responseQuestions);
       });
-  }, []);
-  //display current questions on page
+  }, [restart]);
 
+  useEffect(() => {
+    localStorage.setItem("score", JSON.stringify(score));
+    console.log(localStorage.getItem("score"));
+  }, [showAnswers]);
+
+  //display current questions on page
   function displayQuestionPage() {
     setDisplay(!display);
   }
 
   //set answer to selected
-  function chooseAnswer(questionId, value) {
+  function chooseAnswer(questionId, value, correctAnswer) {
     let foundUserAnswer = userAnswers.find(
       (item) => item.questionId === questionId
     );
@@ -52,9 +61,33 @@ function App() {
             {
               questionId: questionId,
               chosenAnswer: value,
+              correctAnswer: correctAnswer,
             },
           ];
     });
+  }
+  function updateGame() {
+    setShowAnswers(true);
+    allTimeScore();
+  }
+  function countCorrectAnswers() {
+    const correct = userAnswers.filter(
+      (item) => item.correctAnswer === item.chosenAnswer
+    );
+    return correct.length;
+  }
+  function allTimeScore() {
+    const correct = userAnswers.filter(
+      (item) => item.correctAnswer === item.chosenAnswer
+    );
+    setScore(() => {
+      return (correct.length / userAnswers.length) * 100;
+    });
+  }
+  function playAgain() {
+    setRestart(!restart);
+    setShowAnswers(false);
+    setUserAnswers([]);
   }
 
   let questionHTML;
@@ -68,10 +101,11 @@ function App() {
           </button>
         </h1>
       )}
-
       {display && (
         <div>
-          <h1>Movie Trivia</h1>
+          {" "}
+          <p className="scoreP">Last Score: {`${score}%`}</p>
+          <h1 className="Main_title">Movie Trivia</h1>
           {
             (questionHTML = triviaQuestions.map((question) => {
               const chosen = userAnswers.find(
@@ -85,13 +119,21 @@ function App() {
                   handleClick={chooseAnswer}
                   key={question.id}
                   showAnswers={showAnswers}
-                  correct={() => setCount(count + 1)}
                 />
               );
             }))
           }
-          <button onClick={() => setShowAnswers(true)}>Submit Answers</button>
-          {showAnswers && <h2>You got {count}/5 correct!</h2>}
+          <span className="after_trivia">
+            <button className="submit" onClick={updateGame}>
+              Submit Answers
+            </button>
+            {showAnswers && <h2>You got {countCorrectAnswers()}/5 correct!</h2>}
+            {showAnswers && (
+              <button className="play_again" onClick={playAgain}>
+                Play Again
+              </button>
+            )}
+          </span>
         </div>
       )}
     </div>

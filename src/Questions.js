@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 
 const Questions = (props) => {
+  const [count, setCount] = useState(0);
+
   function setAnswer(choice) {
     if (choice === props.userChoice) {
       return "selected";
@@ -10,19 +12,22 @@ const Questions = (props) => {
   }
 
   function finalAnswers(choice) {
+    const classes = [];
+
     if (
       choice === props.userChoice &&
       props.userChoice === props.trivia.correct_answer
     ) {
-      return "correct_answer";
+      classes.push("correct_answer");
     } else if (
       choice === props.userChoice &&
       props.userChoice !== props.trivia.correct_answer
     ) {
-      return "incorrect_answer";
+      classes.push("incorrect_answer");
     } else {
-      return "answers_after_click";
+      classes.push("answers_after_click");
     }
+    return classes;
   }
 
   return (
@@ -36,7 +41,11 @@ const Questions = (props) => {
           <button
             disabled={props.showAnswers}
             onClick={() =>
-              props.handleClick(props.trivia.id, props.trivia.answers[0])
+              props.handleClick(
+                props.trivia.id,
+                props.trivia.answers[0],
+                props.trivia.correct_answer
+              )
             }
             className={
               props.showAnswers
@@ -50,7 +59,11 @@ const Questions = (props) => {
           <button
             disabled={props.showAnswers}
             onClick={() =>
-              props.handleClick(props.trivia.id, props.trivia.answers[1])
+              props.handleClick(
+                props.trivia.id,
+                props.trivia.answers[1],
+                props.trivia.correct_answer
+              )
             }
             className={
               props.showAnswers
@@ -64,7 +77,11 @@ const Questions = (props) => {
           <button
             disabled={props.showAnswers}
             onClick={() =>
-              props.handleClick(props.trivia.id, props.trivia.answers[2])
+              props.handleClick(
+                props.trivia.id,
+                props.trivia.answers[2],
+                props.trivia.correct_answer
+              )
             }
             className={
               props.showAnswers
@@ -78,7 +95,11 @@ const Questions = (props) => {
           <button
             disabled={props.showAnswers}
             onClick={() =>
-              props.handleClick(props.trivia.id, props.trivia.answers[3])
+              props.handleClick(
+                props.trivia.id,
+                props.trivia.answers[3],
+                props.trivia.correct_answer
+              )
             }
             className={
               props.showAnswers
