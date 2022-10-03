@@ -1,7 +1,6 @@
-import "./App.css";
 import Questions from "./Questions";
 import { useEffect, useState } from "react";
-import { nanoid } from "https://cdn.jsdelivr.net/npm/nanoid/nanoid.js";
+import { nanoid } from "nanoid";
 
 function App() {
   // The questions displayed on the page
