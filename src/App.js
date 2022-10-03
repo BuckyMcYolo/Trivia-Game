@@ -36,7 +36,7 @@ function App() {
   useEffect(() => {
     localStorage.setItem("score", JSON.stringify(score));
     console.log(localStorage.getItem("score"));
-  }, [showAnswers]);
+  }, [showAnswers, score]);
 
   //display current questions on page
   function displayQuestionPage() {
@@ -89,7 +89,6 @@ function App() {
     setUserAnswers([]);
   }
 
-  let questionHTML;
   return (
     <div className="App">
       {!display && (
@@ -105,23 +104,21 @@ function App() {
           {" "}
           <p className="scoreP">Last Score: {`${score}%`}</p>
           <h1 className="Main_title">Movie Trivia</h1>
-          {
-            (questionHTML = triviaQuestions.map((question) => {
-              const chosen = userAnswers.find(
-                (item) => item.questionId === question.id
-              );
-              return (
-                <Questions
-                  isChosen={userAnswers.chosenAnswer}
-                  userChoice={chosen && chosen.chosenAnswer}
-                  trivia={question}
-                  handleClick={chooseAnswer}
-                  key={question.id}
-                  showAnswers={showAnswers}
-                />
-              );
-            }))
-          }
+          {triviaQuestions.map((question) => {
+            const chosen = userAnswers.find(
+              (item) => item.questionId === question.id
+            );
+            return (
+              <Questions
+                isChosen={userAnswers.chosenAnswer}
+                userChoice={chosen && chosen.chosenAnswer}
+                trivia={question}
+                handleClick={chooseAnswer}
+                key={question.id}
+                showAnswers={showAnswers}
+              />
+            );
+          })}
           <span className="after_trivia">
             <button className="submit" onClick={updateGame}>
               Submit Answers
